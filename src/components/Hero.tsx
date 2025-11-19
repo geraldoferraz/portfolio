@@ -68,7 +68,7 @@ const Hero = () => {
           <span className="h-10 w-[2px] bg-primary animate-pulse" />
         </h1>
         <p className="text-base md:text-lg text-muted-foreground max-w-2xl">
-          Web payments engineer at AmigoPay (AmigoTech) crafting reliable React, Angular, NestJS, Node.js, Prisma, and
+          Web payments engineer at AmigoPay (AmigoTech) crafting reliable React, Angular, NestJS, Node.js, PostgreSQL and
           Sequelize solutions for compliant transactions.
         </p>
 
@@ -121,7 +121,7 @@ const Hero = () => {
             </div>
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">LinkedIn</p>
-              <p className="font-semibold text-foreground">/geraldo-ferraz</p>
+              <p className="font-semibold text-foreground">geraldo-ferraz</p>
             </div>
           </a>
           <div className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card/60 p-4">

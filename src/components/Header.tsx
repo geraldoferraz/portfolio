@@ -60,49 +60,51 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-lg bg-background/80 border-b border-border/60">
-      <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4 px-4 py-3">
-        <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">Geraldo Ferraz</p>
-        <nav className="hidden md:flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.2em]">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavigate(item.id)}
-              className={`rounded-full border px-3 py-1 transition ${
-                activeSection === item.id
-                  ? "border-primary text-primary"
-                  : "border-border/70 text-muted-foreground hover:border-primary/50 hover:text-primary"
-              }`}
+    <>
+      <header className="sticky top-0 z-40 backdrop-blur-lg bg-background/80 border-b border-border/60">
+        <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4 px-4 py-3">
+          <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">Geraldo Ferraz</p>
+          <nav className="hidden md:flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.2em]">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleNavigate(item.id)}
+                className={`rounded-full border px-3 py-1 transition ${
+                  activeSection === item.id
+                    ? "border-primary text-primary"
+                    : "border-border/70 text-muted-foreground hover:border-primary/50 hover:text-primary"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+          <div className="hidden md:flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-border/70 text-foreground hover:bg-card/50"
+              asChild
             >
-              {item.label}
-            </button>
-          ))}
-        </nav>
-        <div className="hidden md:flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="border-border/70 text-foreground hover:bg-card/50"
-            asChild
+              <a href="https://linkedin.com/in/geraldo-ferraz" target="_blank" rel="noopener noreferrer">
+                LinkedIn
+              </a>
+            </Button>
+            <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+              <a href="mailto:contact@geraldoferraz.dev">Contact</a>
+            </Button>
+          </div>
+          <button
+            className="md:hidden rounded-full border border-border/60 p-2 text-muted-foreground hover:text-primary hover:border-primary/60 transition-colors"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            aria-label="Toggle navigation menu"
           >
-            <a href="https://linkedin.com/in/geraldo-ferraz" target="_blank" rel="noopener noreferrer">
-              LinkedIn
-            </a>
-          </Button>
-          <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-            <a href="mailto:contact@geraldoferraz.dev">Contact</a>
-          </Button>
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
-        <button
-          className="md:hidden rounded-full border border-border/60 p-2 text-muted-foreground hover:text-primary hover:border-primary/60 transition-colors"
-          onClick={() => setIsMenuOpen((prev) => !prev)}
-          aria-label="Toggle navigation menu"
-        >
-          {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-      </div>
+      </header>
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-30 bg-background/95 px-6 py-8 flex flex-col gap-6">
+        <div className="md:hidden fixed inset-0 z-50 bg-background px-6 py-8 flex flex-col gap-6 overflow-y-auto">
           <div className="flex items-center justify-between">
             <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">Geraldo Ferraz</p>
             <button
@@ -145,7 +147,7 @@ const Header = () => {
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 };
 

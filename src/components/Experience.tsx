@@ -43,7 +43,7 @@ const Experience = () => {
         </div>
 
         <div className="space-y-6">
-          {deployments.map((deployment) => (
+          {deployments.map((deployment, index) => (
             <div
               key={deployment.role}
               className="rounded-3xl border border-border/70 bg-gradient-to-br from-card/80 to-black/30 p-6 md:p-8 flex flex-col gap-6"
