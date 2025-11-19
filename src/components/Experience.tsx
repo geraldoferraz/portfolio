@@ -1,113 +1,91 @@
-import { Calendar, MapPin, Briefcase } from "lucide-react";
+import { ArrowUpRight, Calendar, MapPin, Radio } from "lucide-react";
 
-interface ExperienceItem {
-  title: string;
-  period: string;
-  description: string;
-  highlights?: string[];
-}
-
-const experiences: ExperienceItem[] = [
+const deployments = [
   {
-    title: "Mid-Level Software Engineer",
-    period: "Jun 2025 - Present · 5 months",
-    description: "At Amigo Tech, I lead and contribute to critical initiatives in both mobile and backend development. Recently, I spearheaded the development of a new social networking API for the Amigo Network — a feature-rich section within our app that allows doctors to connect, share insights, and build their professional network.",
-    highlights: [
-      "Designed and implemented social networking APIs using NestJS, including real-time connections, feeds, and post ranking",
-      "Participated in the transition from a custom React Native setup to Expo, improving DX and delivery speed",
-      "Actively involved in code reviews, mentorship, and architecture planning",
+    role: "Web Engineer · AmigoPay (AmigoTech)",
+    period: "Jan 2025 — Present",
+    location: "Recife · On-site",
+    impact:
+      "Owned onboarding, payouts, and transaction monitoring experiences. Reduced reconciliation time by 40% by rolling out Sequelize-ledger tables and Angular tooling for finance. Daily toolkit: NestJS + Node.js services, PostgreSQL ledgers, Redis event channels, and Sequelize migrations.",
+    signals: [
+      "Merchant onboarding React flows",
+      "Angular settlement tools",
+      "Node/NestJS services with automated compliance checks",
     ],
   },
   {
-    title: "Junior Software Engineer",
-    period: "Jul 2024 - Jun 2025 · 1 year",
-    description: "As a Software Engineer at Amigo Tech, I contribute to the development and maintenance of our mobile application, which streamlines the daily workflow for doctors. My responsibilities include ensuring code quality through rigorous reviews, maintaining alignment with best practices, and driving performance optimizations.",
-    highlights: [
-      "Played a key role in developing Amigo Intelligence, an AI-driven feature aimed at assisting doctors",
-      "Improved patient record management, enabling doctors to efficiently summarize patient records and analyze exams",
-      "Participated in code reviews and technical discussions",
-    ],
-  },
-  {
-    title: "Software Development Intern",
-    period: "Mar 2024 - Jul 2024 · 5 months",
-    description: "Started my journey at Amigo Tech, contributing to various development tasks and learning from experienced engineers.",
-    highlights: [
-      "Developed new features for the mobile application",
-      "Fixed bugs and improved app performance",
-      "Gained experience with React Native and backend technologies",
+    role: "Engineering Intern · AmigoTech",
+    period: "Aug 2024 — Dec 2024",
+    location: "Recife · On-site",
+    impact:
+      "Supported the payments platform team with CI, QA automation, and SQL migrations, working side-by-side with the on-site squad. Helped maintain NestJS + Node.js services, PostgreSQL/Redis infra, and Sequelize models that back AmigoPay settlements.",
+    signals: [
+      "Sequelize migrations + tooling for new services",
+      "CI pipelines for payment services",
+      "Support tooling for transaction observability",
     ],
   },
 ];
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-20 px-4">
-      <div className="max-w-4xl mx-auto animate-slide-up">
-        <h2 className="text-4xl font-bold mb-12 text-gradient text-center">Experience</h2>
-        
-        <div className="mb-12 text-center">
-          <div className="inline-flex items-center gap-3 glass px-8 py-4 rounded-2xl border border-primary/20 card-glow hover:border-primary/40 smooth-transition">
-            <Briefcase className="h-7 w-7 text-primary animate-pulse" />
-            <div className="text-left">
-              <h3 className="text-2xl font-bold text-foreground">Amigo Tech</h3>
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <MapPin className="h-3 w-3" />
-                <span>Recife, Pernambuco, Brasil</span>
-              </div>
-            </div>
+    <section id="experience" className="py-24 px-6 bg-gradient-to-b from-background to-black">
+      <div className="max-w-6xl mx-auto space-y-12">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-sm uppercase tracking-[0.3em] text-primary/70 mb-3">Deployment log</p>
+            <h2 className="text-4xl md:text-5xl font-semibold text-foreground">Web + payments roles inside AmigoTech.</h2>
+            <p className="text-lg text-muted-foreground/90 mt-4 max-w-[1000px]">
+              I stay embedded with AmigoPay squads, owning delivery rhythms, compliance gates, and architecture decisions
+              across React, Angular, NestJS, and SQL layers.
+            </p>
           </div>
         </div>
-        
-        <div className="relative">
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-secondary" />
-          
-          <div className="space-y-8">
-            {experiences.map((exp, idx) => (
-              <div 
-                key={idx}
-                className="relative pl-20 animate-fade-in"
-                style={{ animationDelay: `${idx * 0.1}s` }}
-              >
-                <div className="absolute left-6 top-6 w-5 h-5 rounded-full bg-gradient-to-br from-primary to-secondary border-4 border-background glow animate-pulse" style={{ animationDelay: `${idx * 0.2}s` }} />
-                
-                <div className="glass p-6 rounded-2xl border border-border card-glow hover:border-primary/50 smooth-transition group hover:scale-[1.02]">
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-                    <div>
-                      <h3 className="text-2xl font-semibold text-gradient mb-1 group-hover:scale-105 smooth-transition">{exp.title}</h3>
-                    </div>
-                    <div className="text-muted-foreground text-sm flex items-center gap-2">
-                      <Calendar className="h-4 w-4 text-accent" />
-                      <span>{exp.period}</span>
-                    </div>
-                  </div>
-                  
-                  <p className="text-foreground/90 mb-4">{exp.description}</p>
-                  
-                  {exp.highlights && (
-                    <ul className="space-y-2 text-foreground/80">
-                      {exp.highlights.map((highlight, i) => (
-                        <li key={i} className="flex gap-2">
-                          <span className="text-primary">▹</span>
-                          <span>{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+
+        <div className="space-y-6">
+          {deployments.map((deployment) => (
+            <div
+              key={deployment.role}
+              className="rounded-3xl border border-border/70 bg-gradient-to-br from-card/80 to-black/30 p-6 md:p-8 flex flex-col gap-6"
+            >
+              <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.35em] text-primary/70">Role</p>
+                  <h3 className="text-2xl font-semibold text-foreground mt-2">{deployment.role}</h3>
+                </div>
+                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                  <span className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-primary" />
+                    {deployment.period}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <MapPin className="h-4 w-4 text-primary" />
+                    {deployment.location}
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
+
+              <p className="text-lg text-muted-foreground/90">{deployment.impact}</p>
+
+              <div className="flex flex-wrap gap-3">
+                {deployment.signals.map((signal) => (
+                  <span key={signal} className="px-4 py-2 rounded-full border border-border/60 text-sm text-foreground/90 bg-card/70">
+                    {signal}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-        
-        <div className="mt-16 glass p-8 rounded-2xl border border-accent/20 card-glow hover:border-accent/40 smooth-transition">
-          <h3 className="text-2xl font-semibold text-gradient mb-3">Education</h3>
-          <p className="text-xl text-foreground/95 mb-1 font-semibold">CESAR School</p>
-          <p className="text-muted-foreground mb-1">Bachelor's degree, Computer Science</p>
-          <p className="text-muted-foreground flex items-center gap-2">
-            <Calendar className="h-4 w-4 text-accent" />
-            2022 - 2025
-          </p>
+
+        <div className="my-10 border-t border-border/70" />
+
+        <div className="rounded-3xl border border-border/70 bg-card/70 p-6 flex flex-wrap gap-6 items-center justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Education</p>
+            <h3 className="text-2xl font-semibold text-foreground mt-2">CESAR School · Computer Science</h3>
+            <p className="text-muted-foreground">2022 — 2025 · Recife</p>
+          </div>
         </div>
       </div>
     </section>

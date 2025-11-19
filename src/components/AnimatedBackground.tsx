@@ -26,8 +26,8 @@ const AnimatedBackground = () => {
         canvas.height * 0.3,
         canvas.width * 0.6
       );
-      gradient1.addColorStop(0, "rgba(66, 133, 244, 0.15)");
-      gradient1.addColorStop(1, "rgba(100, 150, 255, 0)");
+      gradient1.addColorStop(0, "rgba(16, 185, 129, 0.18)");
+      gradient1.addColorStop(1, "rgba(15, 118, 110, 0)");
 
       const gradient2 = ctx.createRadialGradient(
         canvas.width * 0.7 + Math.cos(time * 0.0012) * 150,
@@ -37,8 +37,8 @@ const AnimatedBackground = () => {
         canvas.height * 0.6,
         canvas.width * 0.5
       );
-      gradient2.addColorStop(0, "rgba(102, 160, 255, 0.12)");
-      gradient2.addColorStop(1, "rgba(66, 133, 244, 0)");
+      gradient2.addColorStop(0, "rgba(74, 222, 128, 0.14)");
+      gradient2.addColorStop(1, "rgba(21, 128, 61, 0)");
 
       const gradient3 = ctx.createRadialGradient(
         canvas.width * 0.5 + Math.sin(time * 0.0008) * 180,
@@ -48,8 +48,8 @@ const AnimatedBackground = () => {
         canvas.height * 0.8,
         canvas.width * 0.4
       );
-      gradient3.addColorStop(0, "rgba(66, 153, 225, 0.1)");
-      gradient3.addColorStop(1, "rgba(100, 150, 255, 0)");
+      gradient3.addColorStop(0, "rgba(52, 211, 153, 0.12)");
+      gradient3.addColorStop(1, "rgba(21, 94, 49, 0)");
 
     
       ctx.fillStyle = gradient1;
@@ -65,8 +65,8 @@ const AnimatedBackground = () => {
       ctx.globalCompositeOperation = "source-over";
 
     
-      ctx.strokeStyle = "rgba(66, 133, 244, 0.08)";
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = "rgba(16, 185, 129, 0.12)";
+      ctx.lineWidth = 1.5;
       
       for (let i = 0; i < 5; i++) {
         ctx.beginPath();

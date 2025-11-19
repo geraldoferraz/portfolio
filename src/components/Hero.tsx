@@ -1,97 +1,163 @@
-import { Github, Linkedin, Mail, Code2, Sparkles, ChevronDown } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Check, ClipboardCopy, Github, Linkedin, Mail, Phone } from "lucide-react";
 import { Button } from "./ui/button";
-import heroBg from "@/assets/hero-bg.jpg";
+
+const NAME = "Geraldo Ferraz";
+const PHONE_NUMBER = "+55 81 998455109";
 
 const Hero = () => {
+  const [displayName, setDisplayName] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [phoneCopied, setPhoneCopied] = useState(false);
+  const copyTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    const full = NAME;
+
+    if (!isDeleting && displayName === full) {
+      const pauseTimer = setTimeout(() => setIsDeleting(true), 1200);
+      return () => clearTimeout(pauseTimer);
+    }
+
+    if (isDeleting && displayName === "") {
+      const pauseTimer = setTimeout(() => setIsDeleting(false), 600);
+      return () => clearTimeout(pauseTimer);
+    }
+
+    const timeout = setTimeout(() => {
+      if (isDeleting) {
+        setDisplayName(full.slice(0, displayName.length - 1));
+      } else {
+        setDisplayName(full.slice(0, displayName.length + 1));
+      }
+    }, isDeleting ? 80 : 140);
+
+    return () => clearTimeout(timeout);
+  }, [displayName, isDeleting]);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+    };
+  }, []);
+
+  const handleCopyPhone = async () => {
+    try {
+      if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+      await navigator.clipboard.writeText(PHONE_NUMBER);
+      setPhoneCopied(true);
+      copyTimeoutRef.current = setTimeout(() => setPhoneCopied(false), 1000);
+    } catch {
+      setPhoneCopied(true);
+      copyTimeoutRef.current = setTimeout(() => setPhoneCopied(false), 1000);
+    }
+  };
+
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/90" />
-
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-glow-pulse" />
-      <div
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-glow-pulse"
-        style={{ animationDelay: "1s" }}
-      />
-      <div
-        className="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-accent/10 rounded-full blur-3xl animate-glow-pulse -translate-x-1/2 -translate-y-1/2"
-        style={{ animationDelay: "0.5s" }}
-      />
-
-      <div className="max-w-4xl mx-auto text-center relative z-10 animate-fade-in">
-        <div className="absolute -top-10 -left-10 animate-bounce">
-          <Code2 className="w-8 h-8 text-primary opacity-50" />
-        </div>
-        <div
-          className="absolute -top-5 -right-10 animate-bounce"
-          style={{ animationDelay: "0.5s" }}
-        >
-          <Sparkles className="w-6 h-6 text-secondary opacity-50" />
-        </div>
-
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-scale-in">
-          Hi, I'm <span className="text-gradient animate-glow">Rafael Falk</span>
-        </h1>
-
-        <p className="text-xl md:text-2xl text-muted-foreground mb-4">
-          Software Engineer @ Amigo Tech
-        </p>
-
-        <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          React Native & React | NodeJS | NestJS | TypeScript | SQL
-        </p>
-
-        <div className="flex flex-wrap gap-4 justify-center items-center">
-          <Button
-            size="lg"
-            className="bg-gradient-to-r from-primary via-accent to-secondary hover:opacity-90 smooth-transition glow group"
-            asChild
-          >
-            <a
-              href="https://github.com/falkrafa"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="mr-2 h-5 w-5 group-hover:rotate-12 smooth-transition" />
-              GitHub
-            </a>
-          </Button>
-
-          <Button
-            size="lg"
-            variant="outline"
-            className="glass border-primary/30 text-foreground hover:bg-primary/10 hover:border-primary smooth-transition group"
-            asChild
-          >
-            <a
-              href="https://linkedin.com/in/rafael-falk"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Linkedin className="mr-2 h-5 w-5 group-hover:scale-110 smooth-transition" />
-              LinkedIn
-            </a>
-          </Button>
-
-          <Button
-            size="lg"
-            variant="outline"
-            className="glass border-secondary/30 text-foreground hover:bg-secondary/10 hover:border-secondary smooth-transition group"
-            asChild
-          >
-            <a href="mailto:contact@rafaelfalk.dev">
-              <Mail className="mr-2 h-5 w-5 group-hover:scale-110 smooth-transition" />
-              Contact
-            </a>
-          </Button>
-        </div>
+    <section id="top" className="relative min-h-screen px-6 py-24 md:px-10 overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-black/80 to-background" />
+        <div className="absolute -top-32 right-0 w-[500px] h-[500px] bg-primary/10 blur-[140px]" />
+        <div className="absolute bottom-0 -left-20 w-[420px] h-[420px] bg-accent/10 blur-[120px]" />
       </div>
 
-      <div className="absolute bottom-8 flex flex-col items-center z-20 animate-bounce-slow">
-        <ChevronDown className="w-8 h-8 text-muted-foreground opacity-70" />
+      <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center gap-8">
+        <p className="text-sm uppercase tracking-[0.4em] text-primary/70">Hello, I'm</p>
+        <h1 className="text-5xl md:text-6xl font-semibold leading-tight text-foreground flex items-center gap-2">
+          {displayName}
+          <span className="h-10 w-[2px] bg-primary animate-pulse" />
+        </h1>
+        <p className="text-base md:text-lg text-muted-foreground max-w-2xl">
+          Web payments engineer at AmigoPay (AmigoTech) crafting reliable React, Angular, NestJS, Node.js, Prisma, and
+          Sequelize solutions for compliant transactions.
+        </p>
+
+        <div className="flex flex-wrap justify-center gap-4">
+          <Button
+            size="lg"
+            className="px-8 bg-primary text-primary-foreground shadow-primary/30 hover:bg-primary/90"
+            asChild
+          >
+            <a href="mailto:geraldoferraz876@gmail.com">
+              Send me an email
+              <ArrowUpRight className="ml-2 h-5 w-5" />
+            </a>
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="px-8 border-border/80 text-foreground hover:bg-card/40"
+            asChild
+          >
+            <a href="https://linkedin.com/in/geraldo-ferraz" target="_blank" rel="noopener noreferrer">
+              Connect on LinkedIn
+            </a>
+          </Button>
+        </div>
+
+        <div className="w-full grid gap-4 md:grid-cols-3 text-left text-sm">
+          <a
+            href="https://github.com/geraldoferraz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card/60 p-4 hover:bg-card/80 smooth-transition"
+          >
+            <div className="rounded-full bg-primary/15 text-primary p-2.5">
+              <Github className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">GitHub</p>
+              <p className="font-semibold text-foreground">geraldoferraz</p>
+            </div>
+          </a>
+          <a
+            href="https://linkedin.com/in/geraldo-ferraz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card/60 p-4 hover:bg-card/80 smooth-transition"
+          >
+            <div className="rounded-full bg-primary/15 text-primary p-2.5">
+              <Linkedin className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">LinkedIn</p>
+              <p className="font-semibold text-foreground">/geraldo-ferraz</p>
+            </div>
+          </a>
+          <div className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card/60 p-4">
+            <div className="rounded-full bg-primary/15 text-primary p-2.5">
+              <Phone className="h-5 w-5" />
+            </div>
+            <div className="flex-1">
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Phone</p>
+              <p className="font-semibold text-foreground">{PHONE_NUMBER}</p>
+            </div>
+            <button
+              type="button"
+              onClick={handleCopyPhone}
+              className="rounded-full border border-border/60 p-2 hover:border-primary/60 hover:text-primary transition-colors"
+              aria-label={phoneCopied ? "Copied phone number" : "Copy phone number"}
+            >
+              {phoneCopied ? <Check className="h-4 w-4 text-primary" /> : <ClipboardCopy className="h-4 w-4" />}
+            </button>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="rounded-full border border-border/60 px-4 py-2">ReactJs</span>
+          <span className="rounded-full border border-border/60 px-4 py-2">AngularJs</span>
+          <span className="rounded-full border border-border/60 px-4 py-2">TailwindCss</span>
+          <span className="rounded-full border border-border/60 px-4 py-2">NodeJs</span>
+          <span className="rounded-full border border-border/60 px-4 py-2">NestJS</span>
+          <span className="rounded-full border border-border/60 px-4 py-2">PostgreSQL</span>
+          <span className="rounded-full border border-border/60 px-4 py-2">MySQL</span>
+          <span className="rounded-full border border-border/60 px-4 py-2">Prisma</span>
+          <span className="rounded-full border border-border/60 px-4 py-2">Sequelize</span>
+          <span className="rounded-full border border-border/60 px-4 py-2">Redis</span>
+          <span className="rounded-full border border-border/60 px-4 py-2">Docker</span>
+          <span className="rounded-full border border-border/60 px-4 py-2">CI/CD</span>
+          <span className="rounded-full border border-border/60 px-4 py-2">Observability stacks</span>
+        </div>
       </div>
     </section>
   );

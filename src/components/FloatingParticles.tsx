@@ -49,9 +49,9 @@ const FloatingParticles = () => {
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size * 3
         );
-        gradient.addColorStop(0, `rgba(66, 133, 244, ${particle.opacity})`);
-        gradient.addColorStop(0.5, `rgba(102, 160, 255, ${particle.opacity * 0.5})`);
-        gradient.addColorStop(1, 'rgba(100, 150, 255, 0)');
+        gradient.addColorStop(0, `rgba(16, 185, 129, ${particle.opacity})`);
+        gradient.addColorStop(0.5, `rgba(34, 197, 94, ${particle.opacity * 0.5})`);
+        gradient.addColorStop(1, "rgba(20, 83, 45, 0)");
         
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
@@ -70,8 +70,8 @@ const FloatingParticles = () => {
               particle.x, particle.y,
               otherParticle.x, otherParticle.y
             );
-            lineGradient.addColorStop(0, `rgba(66, 133, 244, ${0.12 * (1 - distance / 150)})`);
-            lineGradient.addColorStop(1, `rgba(102, 160, 255, ${0.12 * (1 - distance / 150)})`);
+            lineGradient.addColorStop(0, `rgba(16, 185, 129, ${0.12 * (1 - distance / 150)})`);
+            lineGradient.addColorStop(1, `rgba(34, 197, 94, ${0.12 * (1 - distance / 150)})`);
             
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
