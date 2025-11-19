@@ -53,6 +53,17 @@ const Hero = () => {
     }
   };
 
+  const handleScrollToContact = () => {
+    const target = document.getElementById("contact");
+    if (!target) {
+      window.location.href = "mailto:contact@geraldoferraz.dev";
+      return;
+    }
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    target.classList.add("section-focus");
+    setTimeout(() => target.classList.remove("section-focus"), 1200);
+  };
+
   return (
     <section id="top" className="relative min-h-screen px-6 py-24 md:px-10 overflow-hidden">
       <div className="absolute inset-0">
@@ -76,12 +87,10 @@ const Hero = () => {
           <Button
             size="lg"
             className="px-8 bg-primary text-primary-foreground shadow-primary/30 hover:bg-primary/90"
-            asChild
+            onClick={handleScrollToContact}
           >
-            <a href="mailto:geraldoferraz876@gmail.com">
-              Send me an email
-              <ArrowUpRight className="ml-2 h-5 w-5" />
-            </a>
+            Contact me
+            <ArrowUpRight className="ml-2 h-5 w-5" />
           </Button>
           <Button
             size="lg"
